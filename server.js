@@ -1,21 +1,20 @@
 const express = require('express');
-const connectDB = require('./config/db');
-//const path = require('path');
-
 const app = express();
+require('dotenv').config();
+const mongoose = require('mongoose');
+const port = process.env.PORT || 8080;
+const dbURL = process.env.MONGODB_URI;
+
 
 // Connect Database
-connectDB();
+mongoose.connect(dbURL, () => { console.log("Connected to DataBase") });
 
 // Init Middleware
 app.use(express.json({ extended: false }));
 
 // Define Routes
 app.use('/api/users', require('./routes/users'));
-app.use('/api/auth', require('./routes/auth'));
 
 
 
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(port, () => console.log(`Server started on port ${port}`));

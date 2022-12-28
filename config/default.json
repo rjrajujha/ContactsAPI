@@ -1,4 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://SudhakaraDalai:Projects%4010x@mycloudcluster.glkpt0w.mongodb.net/groupProjects?retryWrites=true&w=majority",
-    "jwtSecret": "secret"
-}
