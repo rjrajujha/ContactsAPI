@@ -16,8 +16,8 @@ const User = require('../models/User');
  */
 router.post(
   '/signup',
-  check('name', 'Please add name').not().isEmpty(),
-  check('email', 'Please include a valid email').isEmail(),
+
+  check('userid', 'Please include a valid email').isEmail(),
   check(
     'password',
     'Please enter a password with 6 or more characters'
@@ -28,18 +28,17 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { userid, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ userid });
 
       if (user) {
         return res.status(400).json({ msg: 'User already exists' });
       }
 
       user = new User({
-        name,
-        email,
+        userid,
         password
       });
 
@@ -82,7 +81,7 @@ router.post(
 router.post(
   '/login',
   
-  check('email', 'Please include a valid email').isEmail(),
+  check('userid', 'Please include a valid email').isEmail(),
   check(
     'password',
     'Please enter a password with 6 or more characters'
@@ -93,10 +92,10 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { userid, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ userid });
 
       if (!user) {
         return res.status(400).json({ msg: "Username not found" });
