@@ -80,7 +80,7 @@ router.post(
 
 router.post(
   '/login',
-  
+
   check('userid', 'Please include a valid email').isEmail(),
   check(
     'password',
@@ -101,11 +101,11 @@ router.post(
         return res.status(400).json({ msg: "Username not found" });
       }
       const checkPassword = await bcrypt.compare(password, user.password);
-            
-            if(!checkPassword)
-                return res.status(400).json({
-                    message: "Incorrect Password"
-                });
+
+      if (!checkPassword)
+        return res.status(400).json({
+          message: "Incorrect Password"
+        });
 
       const payload = {
         user: {
@@ -121,7 +121,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({ login: "Sucessful" }); // res.json({ token });
         }
       );
     } catch (err) {
@@ -131,14 +131,5 @@ router.post(
   }
 );
 
-router.get("/me", auth, async (req, res) => {
-  try {
-    // request.user is getting fetched from the auth function defined in middleware
-    // after token authentication
-    const user = await User.findById(req.user.id);
-    res.json(user);
-  } catch (e) {
-    res.send({ message: "Error in Fetching user" });
-  }
-});
+
 module.exports = router;
