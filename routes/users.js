@@ -121,7 +121,7 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.json({ login: "Sucessful" }); // res.json({ token });
+          res.json({ token });    // res.json({ login: "Sucessful" }); 
         }
       );
     } catch (err) {
