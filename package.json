@@ -1,33 +1,37 @@
 {
-  "name": "contactsapi",
-  "version": "1.0.0",
-  "description": "Contacts Manger Project : Back-End",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "devStart": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rjrajujha/ContactsAPI.git"
-  },
-  "author": "Raju Jha",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rjrajujha/ContactsAPI/issues"
-  },
-  "homepage": "https://github.com/rjrajujha/ContactsAPI#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.8",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-validator": "^6.14.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.8.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  }
+    "name": "contactsapi",
+    "version": "1.0.0",
+    "description": "Contacts Manger Project : Back-End",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "devStart": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rjrajujha/ContactsAPI.git"
+    },
+    "author": "Raju Jha",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rjrajujha/ContactsAPI/issues"
+    },
+    "homepage": "https://github.com/rjrajujha/ContactsAPI#readme",
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "bcryptjs": "^2.4.3",
+        "config": "^3.3.8",
+        "cors": "^2.8.5",
+        "csvtojson": "^2.0.10",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-validator": "^6.14.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.8.1",
+        "multer": "^1.4.5-lts.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
 }
