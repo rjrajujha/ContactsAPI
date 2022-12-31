@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Contacts = require("../Model/contacts")
+const Contacts = require("../Models/contacts")
 const auth = require("../Middlewear/authentication")
 
 router.get("/:email", auth, async (req, res) => {

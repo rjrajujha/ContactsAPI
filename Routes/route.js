@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const csvtojson = require("csvtojson");
 const upload = require("../Middlewear/middle")
-const Contacts = require("../Model/contacts")
+const Contacts = require("../Models/contacts")
 const auth = require("../Middlewear/authentication")
 const fs = require("fs");
 
