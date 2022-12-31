@@ -18,8 +18,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", login)
-app.use("/", route)
+app.use("/", login);
+app.use("/csv", route);
 
 app.use("/getContacts", getContacts);
 app.use("/search", searchContacts);
