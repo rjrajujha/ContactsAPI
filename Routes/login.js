@@ -6,7 +6,7 @@ const User = require("../Models/user");
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
-const JWT_SECRET = process.env.jwtSecret
+const JWT_SECRET = process.env.jwtSecret || "secret";
 
 router.post(
   "/register",
