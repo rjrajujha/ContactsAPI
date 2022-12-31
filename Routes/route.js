@@ -5,8 +5,6 @@ const contact= require("../Models/contacts")
 const auth = require ("../Middlewear/authentication")
 const fs = require("fs");
 
-
-
 router.post("/upload",auth,upload.single('contact'),(req,res)=>{
  
     try{
@@ -34,8 +32,6 @@ router.post("/upload",auth,upload.single('contact'),(req,res)=>{
         })
     }
 })
-
-
 
 
 router.delete("/del/:id",auth,async (req,res)=>{
