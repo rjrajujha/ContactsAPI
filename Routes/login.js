@@ -29,7 +29,7 @@ router.post(
       }
 
       bcrypt.hash(password, 10, async function (err, hash) {
- 
+
         if (err) {
           return res.status(500).json({
             status: "failed",

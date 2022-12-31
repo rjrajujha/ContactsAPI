@@ -9,7 +9,6 @@ router.get("/", auth, async (req, res) => {
         var name = admin[0].email.substring(0, admin[0].email.lastIndexOf("@"));
 
         if (admin) {
-            // console.log(existing_contacts)
             res.status(200).json(name)
         }
 
