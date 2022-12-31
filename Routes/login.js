@@ -3,9 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/user");
+const dotenv = require("dotenv");
+dotenv.config();
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
+
 const JWT_SECRET = process.env.jwtSecret || "secret";
 
 router.post(
