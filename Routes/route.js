@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const csvtojson =require("csvtojson");
 const upload = require("../Middlewear/middle")
-const contact= require("../Models/contacts")
+const Contacts= require("../Models/contacts")
 const auth = require ("../Middlewear/authentication")
 const fs = require("fs");
 
@@ -20,7 +20,7 @@ router.post("/upload",auth,upload.single('contact'),(req,res)=>{
             for(let i=0;i<csvData.length;i++){
                 csvData[i].useRef=req.user;
             }
-            contact.insertMany(csvData)
+            Contacts.insertMany(csvData)
             .then( ()=>{
                  fs.unlink("public/contact.csv",(err)=>{console.log(err)})
                 res.json({
@@ -46,7 +46,7 @@ router.delete("/del/:id",auth,async (req,res)=>{
     try{
         let {id}=req.params;
         id=id.split(",")
-        await contact.deleteMany({_id: {$in: id}})
+        await Contacts.deleteMany({_id: {$in: id}})
         res.status(200).json({
             message:"successfully deleted"
         })
