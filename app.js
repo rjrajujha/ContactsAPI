@@ -1,7 +1,7 @@
 //Imports
 const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
+const dotenv = require("dotenv")
+const cors = require("cors")
 const route = require("./Routes/route")
 const connectDB = require("./connectDB/connect");
 
@@ -10,6 +10,7 @@ const getAdmin = require("./Routes/getAdmin")
 
 const getContacts = require("./Routes/getContacts")
 const searchContacts = require("./Routes/search");
+const { get } = require("mongoose");
 
 //Use and config
 const app = express();
@@ -18,8 +19,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", login);
-app.use("/csv", route);
+app.use("/", login)
+
+app.use("/", route)
 
 app.use("/getContacts", getContacts);
 app.use("/search", searchContacts);

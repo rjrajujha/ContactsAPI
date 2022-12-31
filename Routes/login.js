@@ -1,21 +1,22 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/user");
-const dotenv = require("dotenv");
-dotenv.config();
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
+const { JWT_SECRET } = require("../keys");
 
-const JWT_SECRET = process.env.jwtSecret || "secret";
+//signup new user
 
 router.post(
   "/register",
   body("email").isEmail(),
   body("password").isLength({ min: 6, max: 14 }),
   async (req, res) => {
+    //check whethre usrers alread existe or not
 
     try {
       const errors = validationResult(req);
@@ -31,8 +32,9 @@ router.post(
         });
       }
 
+      //new user creat
       bcrypt.hash(password, 10, async function (err, hash) {
-
+        // Store hash in your password DB.
         if (err) {
           return res.status(500).json({
             status: "failed",
@@ -59,6 +61,7 @@ router.post(
   }
 );
 
+//login
 
 router.post("/login", async (req, res) => {
   try {
@@ -72,8 +75,9 @@ router.post("/login", async (req, res) => {
       });
     }
 
+    // if(user){
     var result = await bcrypt.compare(password, user.password);
-
+    // }
     const token = jwt.sign({ user_id: user._id }, JWT_SECRET, {
       expiresIn: "2h",
     });
