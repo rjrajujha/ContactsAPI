@@ -10,7 +10,7 @@ const getAdmin = require("./Routes/getAdmin")
 
 const getContacts = require("./Routes/getContacts")
 const searchContacts = require("./Routes/search");
-const { get } = require("mongoose");
+const port = process.env.PORT || 8080;
 
 //Use and config
 const app = express();
@@ -31,7 +31,7 @@ app.get('/aboutus', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(process.env.PORT, async () => {
+app.listen(port, async () => {
     await connectDB();
-    console.log(`Ther server is up at ${process.env.PORT}`)
+    console.log(`Ther server is up at ${port}`)
 })
