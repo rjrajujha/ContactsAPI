@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../Models/user");
+const User = require("../Model/user");
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));

@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const csvtojson =require("csvtojson");
+const csvtojson = require("csvtojson");
 const upload = require("../Middlewear/middle")
-const Contacts= require("../Models/contacts")
-const auth = require ("../Middlewear/authentication")
+const Contacts = require("../Model/contacts")
+const auth = require("../Middlewear/authentication")
 const fs = require("fs");
 
 // router.get("/",(req,res)=>{
@@ -11,30 +11,30 @@ const fs = require("fs");
 
 //Inserting the csv
 
-router.post("/upload",auth,upload.single('contact'),(req,res)=>{
+router.post("/upload", auth, upload.single('contact'), (req, res) => {
     //   console.log(req.user)
-    try{
+    try {
         csvtojson().fromFile("public/contact.csv")
-        .then( (csvData)=>{
-            // console.log(csvData)
-            for(let i=0;i<csvData.length;i++){
-                csvData[i].useRef=req.user;
-            }
-            Contacts.insertMany(csvData)
-            .then( ()=>{
-                 fs.unlink("public/contact.csv",(err)=>{console.log(err)})
-                res.json({
-                    message:"sucessfully inserted"
-                })
-            }).catch((e)=>{
-                res.json({
-                    message:e.message
-                })
+            .then((csvData) => {
+                // console.log(csvData)
+                for (let i = 0; i < csvData.length; i++) {
+                    csvData[i].useRef = req.user;
+                }
+                Contacts.insertMany(csvData)
+                    .then(() => {
+                        fs.unlink("public/contact.csv", (err) => { console.log(err) })
+                        res.json({
+                            message: "sucessfully inserted"
+                        })
+                    }).catch((e) => {
+                        res.json({
+                            message: e.message
+                        })
+                    })
             })
-        })
-    }catch(e){
+    } catch (e) {
         res.status(400).json({
-            message:e.message
+            message: e.message
         })
     }
 })
@@ -42,21 +42,21 @@ router.post("/upload",auth,upload.single('contact'),(req,res)=>{
 
 
 
-router.delete("/del/:id",auth,async (req,res)=>{
-    try{
-        let {id}=req.params;
-        id=id.split(",")
-        await Contacts.deleteMany({_id: {$in: id}})
+router.delete("/del/:id", auth, async (req, res) => {
+    try {
+        let { id } = req.params;
+        id = id.split(",")
+        await Contacts.deleteMany({ _id: { $in: id } })
         res.status(200).json({
-            message:"successfully deleted"
+            message: "successfully deleted"
         })
-    }catch(e){
+    } catch (e) {
         res.status(400).json({
-            message:e.message
+            message: e.message
         })
     }
 })
 
 //Deleting from csv
 
-module.exports= router;
+module.exports = router;
