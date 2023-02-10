@@ -1,22 +1,15 @@
 const router = require("express").Router();
 const csvtojson = require("csvtojson");
-const upload = require("../Middlewear/middle")
+const multer = require("../Middlewear/middle")
 const Contacts = require("../Models/contacts")
 const auth = require("../Middlewear/authentication")
 const fs = require("fs");
 
-// router.get("/",(req,res)=>{
-//     res.send("Working");
-// })
 
-//Inserting the csv
-
-router.post("/upload", auth, upload.single('contact'), (req, res) => {
-    //   console.log(req.user)
+router.post("/upload", auth, multer.single('contact'), (req, res) => {
     try {
         csvtojson().fromFile("public/contact.csv")
             .then((csvData) => {
-                // console.log(csvData)
                 for (let i = 0; i < csvData.length; i++) {
                     csvData[i].useRef = req.user;
                 }
@@ -39,9 +32,6 @@ router.post("/upload", auth, upload.single('contact'), (req, res) => {
     }
 })
 
-
-
-
 router.delete("/del/:id", auth, async (req, res) => {
     try {
         let { id } = req.params;
@@ -57,6 +47,5 @@ router.delete("/del/:id", auth, async (req, res) => {
     }
 })
 
-//Deleting from csv
 
 module.exports = router;

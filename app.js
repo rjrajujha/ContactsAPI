@@ -31,7 +31,7 @@ app.get('/aboutus', function (req, res) {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(port, async () => {
-    await connectDB();
+app.listen(port, () => {
+    connectDB();
     console.log(`Ther server is up at ${port}`)
 })

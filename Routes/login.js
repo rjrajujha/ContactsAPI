@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/user");
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
-const { JWT_SECRET } = require("../keys");
+
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET
 
 //signup new user
-
 router.post(
   "/register",
   body("email").isEmail(),
   body("password").isLength({ min: 6, max: 14 }),
   async (req, res) => {
-    //check whethre usrers alread existe or not
 
+    //check whethre usrers alread existe or not
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -62,7 +62,6 @@ router.post(
 );
 
 //login
-
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;

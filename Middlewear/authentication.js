@@ -1,32 +1,34 @@
-var jwt=require('jsonwebtoken');
-const { JWT_SECRET } = require("../keys")
+var jwt = require('jsonwebtoken');
+
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET
+
 const express = require("express");
 
-const Auth=(async (req, res, next) => {
+const Auth = ((req, res, next) => {
 
-    if(req.headers.authorization){
-        const token=req.headers.authorization;
-        // console.log(token)
-        if(token){
-            jwt.verify(token,JWT_SECRET,async(err,decoded)=>{
-                if(err){
+    if (req.headers.authorization) {
+        const token = req.headers.authorization;
+        if (token) {
+            jwt.verify(token, JWT_SECRET, (err, decoded) => {
+                if (err) {
                     return res.status(403).json({
-                        status:"failed",
-                        message:"not a valid token"
+                        status: "failed",
+                        message: "not a valid token"
                     })
                 }
-                // console.log(decoded);
-                req.user=decoded.user_id;
+                req.user = decoded.user_id;
                 next()
             })
         }
-    }else{
+    } else {
         return res.status(403).json({
-            status:"failed",
-            message:"unauthorized"
+            status: "failed",
+            message: "unauthorized"
         })
-    }}
+    }
+}
 )
 
 
-module.exports=Auth;
+module.exports = Auth;
